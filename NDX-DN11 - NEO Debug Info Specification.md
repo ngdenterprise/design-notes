@@ -188,8 +188,8 @@ to accommodate changes related to Neo 3.
   - For Neo 2 contract debug info, hash property is optional
   - For Neo 3 contract debug info, hash property is required
 - made top level `entrypoint` property optional
-  - For Neo 2 contract debug info, hash property is required
-  - For Neo 3 contract debug info, hash property is not used
+  - For Neo 2 contract debug info, entrypoint property is required
+  - For Neo 3 contract debug info, entrypoint property is not used
 - Compressed Neo 3 contract debug info files will use `.nefdbgnfo`
   for their extension. Compressed Neo 2 contract debug info files 
   will continue to use the `.avmdbgnfo` extension
