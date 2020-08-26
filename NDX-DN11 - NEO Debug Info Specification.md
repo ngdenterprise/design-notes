@@ -173,7 +173,7 @@ interface Method {
 
 interface Event {
     id: string; // previously "name"
-    name: string; // format: "{namespace}-{display-name}
+    name: string; // format: "{namespace},{display-name}
     params: string[]; // format: "{name},{type}
 }
 ```
@@ -219,7 +219,7 @@ interface Method {
 
 interface Event {
     id: string; // previously "name"
-    name: string; // format: "{namespace}-{display-name}
+    name: string; // format: "{namespace},{display-name}
     params: string[]; // format: "{name},{type}
 }
 ```
