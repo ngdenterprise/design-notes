@@ -1,29 +1,23 @@
 {
-    "$schema": "http://json-schema.org/schema#",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
     "$id": "http://neo.org/schemas/neo-invoke.json",
-    "type": "object",
-    "required": [
-        "hash",
-        "args"
-    ],
-    "definitions": {
+    "$defs": {
         "contract-parameter-type": {
             "type": "string",
             "enum": [
-                "Signature",
                 "Boolean",
                 "Integer",
+                "ByteArray",
+                "String",
                 "Hash160",
                 "Hash256",
-                "ByteArray",
                 "PublicKey",
-                "String",
+                "Signature",
                 "Array",
                 "Map"
             ]
         },
         "contract-parameter": {
-            "$id": "#contract-parameter",
             "oneOf": [
                 {
                     "type": "boolean"
@@ -37,14 +31,14 @@
                 {
                     "type": "array",
                     "items": {
-                        "$ref": "$contract-parameter"
+                        "$ref": "#/$defs/contract-parameter"
                     }
                 },
                 {
                     "type": "object",
                     "properties": {
                         "type": {
-                            "$ref": "#/definitions/contract-parameter-type"
+                            "$ref": "#/$defs/contract-parameter"
                         },
                         "value": {
                             "oneOf": [
@@ -59,7 +53,7 @@
                                     "items": {
                                         "oneOf": [
                                             {
-                                                "$ref": "#contract-parameter"
+                                                "$ref": "#/$defs/contract-parameter"
                                             },
                                             {
                                                 "type": "object",
@@ -69,10 +63,10 @@
                                                 ],
                                                 "properties": {
                                                     "key": {
-                                                        "$ref": "#contract-parameter"
+                                                        "$ref": "#/$defs/contract-parameter"
                                                     },
                                                     "value": {
-                                                        "$ref": "#contract-parameter"
+                                                        "$ref": "#/$defs/contract-parameter"
                                                     }
                                                 }
                                             }
@@ -86,14 +80,48 @@
             ]
         }
     },
+
+
+
+    "type": "object",
+    "required": [
+        "contract"
+    ],
+
     "properties": {
-        "hash": {
-            "type": "string" // hex-encoded ScriptHash
+        "contract": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "required": ["hash"],
+                    "properties": {
+                        "script-hash": {
+                            "type": "string",
+                            "pattern": "^0x[0-9a-fA-F]{40}$",
+                            "$comment": "hex-encoded ScriptHash"
+                        }
+                    }
+                },
+                {
+                    "type": "object",
+                    "required": ["path"],
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "$comment": "path to contract .avm/.nef file"
+                        }
+                    }
+                }
+            ]
+        },
+        "operation": {
+            "type": "string",
+            "$comment": "required for neo 3"
         },
         "args": {
             "type": "array",
             "items": {
-                "$ref": "#contract-parameter"
+                "$ref": "#/$defs/contract-parameter"
             }
         }
     }
