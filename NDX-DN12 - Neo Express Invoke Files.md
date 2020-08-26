@@ -11,7 +11,7 @@ This design note describes the contract invocation file format used by v2 of
 
 ## Current Status
 
-neo-express master branch (unreleased v2.0) supports the format described in this
+neo-express insiders branch (unreleased v2.0) supports the format described in this
 note for the `contract invoke` command. As of right now, contract invocation files
 must be written by hand, but we expect a future version of
 [Visual DevTracker](https://github.com/neo-project/neo-visual-tracker)
@@ -29,7 +29,7 @@ neo-express command. This document describes the initial format of Neo contract
 invoke files. Additionally, this repo contains a [JSON Schema](./neo-invoke-schema.json)
 file that can be used to validate contract invoke files.
 
-> Note, this format is in draft and may evolve as we get closer to the neo-express
+> Note, this format is in draft and will likely evolve as we get closer to the neo-express
   v2.0 release.
 
 There are several advantages of using a invoke file instead of the command line:
