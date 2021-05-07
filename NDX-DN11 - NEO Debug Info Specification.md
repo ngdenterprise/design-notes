@@ -223,3 +223,44 @@ interface Event {
     params: string[]; // format: "{name},{type}
 }
 ```
+
+## v1.2 Format (draft)
+
+In v1.2, the following changes are being made to the debug info format
+to accommodate changes related to the new nccs compiler for Neo 3.
+
+- added top level `variables` property containing the static variables for the
+  associated contract
+
+> Note, for v1.2, we are also considering adding a top level `structs` property 
+> to enable the debugger to distingish between arrays and structs. However, 
+> more research is needed before finalizing this design.
+
+``` typescript
+interface DebugInformatiom {
+    hash?: string;
+    entrypoint?: string;
+    documents: string[];
+    variables: string[]; // format: "{name},{type}
+    methods: Method[];
+    events: Event[];
+}
+
+interface Method {
+    id: string;
+    name: string; // format: "{namespace},{display-name}
+    range: string; // format: "{start-address}-{end-address}
+    params: string[]; // format: "{name},{type}
+    return: string;
+    variables: string[]; // format: "{name},{type}
+    sequence-points: string[]; // format: "{address}[{document-index}]{start-line}:{start-column}-{end-line}:{end-column}"
+}
+
+interface Event {
+    id: string; // previously "name"
+    name: string; // format: "{namespace},{display-name}
+    params: string[]; // format: "{name},{type}
+}
+```
+
+
