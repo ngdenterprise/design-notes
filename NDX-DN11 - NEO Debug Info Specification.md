@@ -229,19 +229,20 @@ interface Event {
 In v1.2, the following changes are being made to the debug info format
 to accommodate changes related to the new nccs compiler for Neo 3.
 
-- added top level `variables` property containing the static variables for the
-  associated contract
+- added top level `static-variables` property containing the static variables for the
+  associated contract. Format for `static-variables` items matches the `name,type`
+  format used for method `params` and `variables` properties.
 
-> Note, for v1.2, we are also considering adding a top level `structs` property 
-> to enable the debugger to distingish between arrays and structs. However, 
-> more research is needed before finalizing this design.
+> Note, we are also considering adding a top level `structs` property 
+> to enable a better debugger experience for structs. However, more 
+> research is needed before finalizing this design.
 
 ``` typescript
 interface DebugInformatiom {
     hash?: string;
     entrypoint?: string;
     documents: string[];
-    variables: string[]; // format: "{name},{type}
+    static-variables: string[]; // format: "{name},{type}
     methods: Method[];
     events: Event[];
 }
