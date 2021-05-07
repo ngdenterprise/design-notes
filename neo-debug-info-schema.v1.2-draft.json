@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "$id": "http://neo.org/schemas/neo-debug-info.v1.json",
+    "type": "object",
+    "required": [
+        "entrypoint",
+        "documents",
+        "methods",
+        "events"
+    ],
+    "properties": {
+        "entrypoint": {
+            "type": "string"
+        },
+        "documents": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "static-variables": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "methods": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "range",
+                    "params",
+                    "return",
+                    "variables",
+                    "sequence-points"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "range": {
+                        "type": "string"
+                    },
+                    "params": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "return": {
+                        "type": "string"
+                    },
+                    "variables": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "sequence-points": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "events": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "params"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "params": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
