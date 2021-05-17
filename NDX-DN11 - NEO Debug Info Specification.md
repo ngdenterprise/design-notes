@@ -232,6 +232,9 @@ to accommodate changes related to the new nccs compiler for Neo 3.
 - added top level `static-variables` property containing the static variables for the
   associated contract. Format for `static-variables` items matches the `name,type`
   format used for method `params` and `variables` properties.
+- added optional slot index value for contract `static-variables`, `params` and
+  `variables` properties in order to support non-contiguous slot usage by the
+  new `nccs` compiler.
 
 > Note, we are also considering adding a top level `structs` property 
 > to enable a better debugger experience for structs. However, more 
@@ -242,7 +245,7 @@ interface DebugInformatiom {
     hash?: string;
     entrypoint?: string;
     documents: string[];
-    static-variables: string[]; // format: "{name},{type}
+    static-variables: string[]; // format: "{name},{type}(,{slotIndex})?
     methods: Method[];
     events: Event[];
 }
@@ -251,16 +254,16 @@ interface Method {
     id: string;
     name: string; // format: "{namespace},{display-name}
     range: string; // format: "{start-address}-{end-address}
-    params: string[]; // format: "{name},{type}
+    params: string[]; // format: "{name},{type}(,{slotIndex})?
     return: string;
-    variables: string[]; // format: "{name},{type}
+    variables: string[]; // format: "{name},{type}(,{slotIndex})?
     sequence-points: string[]; // format: "{address}[{document-index}]{start-line}:{start-column}-{end-line}:{end-column}"
 }
 
 interface Event {
     id: string; // previously "name"
     name: string; // format: "{namespace},{display-name}
-    params: string[]; // format: "{name},{type}
+    params: string[]; // format: "{name},{type}(,{slotIndex})?
 }
 ```
 
